@@ -33,14 +33,14 @@ def simulate_and_plot(A, omega):
         plt.plot(ts, s[:,j], label='Oscilator %s' % (j))
     
     # add a legend
-    plt.legend()
+    #plt.legend()
     
     # and show it
     plt.show()
 
 def main():
     # set parameters and create oscilator
-    A = - complete_graph(4)
+    A = - cyclic_graph(8)
     omega   =   0.3
     
     simulate_and_plot(A, omega)
