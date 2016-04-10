@@ -1,4 +1,5 @@
 import numpy as np
+import networkx as nx
 from scipy.integrate import odeint
 
 class KuramotoOscilator(object):
@@ -74,6 +75,28 @@ class KuramotoOscilator(object):
         return self._A
     
     @property
+    def graph(self):
+        """
+        Returns a graph representing the topology of this
+        KuramotoOscilator
+        """
+        
+        # create a graph and read adjacency matrix
+        G = nx.DiGraph()
+        
+        A = self.A
+        N = self.N
+        
+        # add all the edges
+        for i in range(N):
+            for j in range(N):
+                if A[i, j] != 0:
+                    G.add_edge(i, j, weight=A[i,j])
+        
+        # and return the graph
+        return G
+        
+    @property
     def N(self):
         """
         Returns the size N of this system
@@ -138,8 +161,6 @@ class KuramotoOscilator(object):
             
             # join them as a sum
             ode_parts.append('(%s)' % ')+('.join(s))
-        
-        print(ode_parts)
         
         # build a function string
         return 'lambda theta,t:np.array([(%s)])' % '),('.join(ode_parts)

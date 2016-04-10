@@ -2,42 +2,48 @@ import oscilator
 
 import numpy as np
 from numpy import random as npr
+from graph_generators import cyclic_graph, complete_graph
 
 from matplotlib import pyplot as plt
 
-from tqdm import trange
+import networkx as nx
 
-def main():
-    
-    # set parameters and create oscilator
-    A = [
-        [0, -1, -1], 
-        [-1, 0, -1], 
-        [-1, -1, 0]
-    ]
-    omega   =   0.3
+def simulate_and_plot(A, omega):
+    # create an oscilator object
     osc     =   oscilator.KuramotoOscilator(A = A, omegas = omega)
     
-    # number of times we smulate, 100 for now
-    N = 1
-    
-    # creat initial values and time
-    y0s = npr.uniform(0, 2*np.pi, size=(N, osc.N))
+    # create initial values and time
+    y0 = npr.uniform(0, 2*np.pi, size=osc.N)
     ts = np.arange(0, 20, 0.01)
     
-    # solutions
-    sols = []
+    # simulate
+    s = osc.simulate(y0, ts)
     
-    # repeat N times
-    for i in trange(N):
-        s = osc.simulate(y0s[i], ts)
-        sols.append(s)
-        
-        for j in range(osc.N):
-            plt.plot(ts, s[:,j], label='Run %s Iterator %s' % (i, j))
+    # make a new figure and subplot
+    plt.figure()
     
+    # plot the graph
+    plt.subplot(211)
+    nx.draw_networkx(osc.graph)
+    
+    # plot the graph itself
+    plt.subplot(212)
+    
+    for j in range(osc.N):
+        plt.plot(ts, s[:,j], label='Oscilator %s' % (j))
+    
+    # add a legend
     plt.legend()
+    
+    # and show it
     plt.show()
+
+def main():
+    # set parameters and create oscilator
+    A = - complete_graph(4)
+    omega   =   0.3
+    
+    simulate_and_plot(A, omega)
 
 if __name__ == '__main__':
     main()
