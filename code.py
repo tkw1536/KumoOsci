@@ -24,7 +24,9 @@ def simulate_and_plot(A, omega):
     
     # plot the graph
     plt.subplot(211)
-    nx.draw_networkx(osc.graph)
+    
+    G = osc.graph
+    nx.draw_networkx(G, pos=nx.circular_layout(G))
     
     # plot the graph itself
     plt.subplot(212)
@@ -40,7 +42,7 @@ def simulate_and_plot(A, omega):
 
 def main():
     # set parameters and create oscilator
-    A = - cyclic_graph(8)
+    A = - cyclic_graph(6)
     omega   =   0.3
     
     simulate_and_plot(A, omega)
