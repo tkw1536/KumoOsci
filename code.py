@@ -41,7 +41,7 @@ def simulate_and_plot(A, omega):
     # draw each of the components with the right color
     nx.draw_networkx_edges(G, pos=layout)
     nx.draw_networkx_nodes(G, pos=layout, node_color=colors)
-    nx.draw_networkx_labels(G, pos=layout)
+    # nx.draw_networkx_labels(G, pos=layout)
     
     # and show it
     plt.show()
