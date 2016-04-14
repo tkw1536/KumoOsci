@@ -22,27 +22,33 @@ def simulate_and_plot(A, omega):
     # make a new figure and subplot
     plt.figure()
     
-    # plot the graph
-    plt.subplot(211)
-    
-    G = osc.graph
-    nx.draw_networkx(G, pos=nx.circular_layout(G))
-    
-    # plot the graph itself
+    # first plot the graph itself
     plt.subplot(212)
+    colors = []
     
     for j in range(osc.N):
-        plt.plot(ts, s[:,j], label='Oscilator %s' % (j))
+        # draw and store color
+        c = plt.plot(ts, s[:,j], label='Oscilator %s' % (j))
+        colors.append(c[0].get_color())
     
-    # add a legend
-    #plt.legend()
+    # now plot the graph
+    plt.subplot(211)
+    
+    # Get the graph and layout
+    G = osc.graph
+    layout = nx.circular_layout(G)
+    
+    # draw each of the components with the right color
+    nx.draw_networkx_edges(G, pos=layout)
+    nx.draw_networkx_nodes(G, pos=layout, node_color=colors)
+    nx.draw_networkx_labels(G, pos=layout)
     
     # and show it
     plt.show()
 
 def main():
     # set parameters and create oscilator
-    A = - cyclic_graph(6)
+    A = - cyclic_graph(3)
     omega   =   0.3
     
     simulate_and_plot(A, omega)
