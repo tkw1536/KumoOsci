@@ -1,12 +1,12 @@
 import matplotlib
-matplotlib.use('Agg', force=True)
+# matplotlib.use('Agg', force=True)
 from matplotlib import pyplot as plt
 
 import oscilator
 
 import numpy as np
 from numpy import random as npr
-from graph_generators import cyclic_graph, complete_graph
+from graph_generators import cyclic_graph, complete_graph, random_graph
 from plotter import plot_network_and_graph, animate_network
 
 def simulate_and_plot(A, omega):
@@ -22,12 +22,14 @@ def simulate_and_plot(A, omega):
     
     # Make a new figure, plot and show
     plt.figure()
-    ani = animate_network(osc, ts, s)
-    ani.save('test.mp4', writer='imagemagick', fps=250, dpi=50)
+    
+    plot_network_and_graph(osc, ts, s)
+    
+    plt.show()
 
 def main():
     # set parameters and create oscilator
-    A = - cyclic_graph(5)
+    A = - random_graph(10)
     omega   =   0.3
     
     simulate_and_plot(A, omega)
