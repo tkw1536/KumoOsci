@@ -1,4 +1,5 @@
 import numpy as np
+from numpy import random as npr
 
 def cyclic_graph(N):
     """
@@ -33,4 +34,21 @@ def complete_graph(N):
     """
     
     return np.ones((N, N)) - np.eye(N)
+
+def random_graph(N):
+    """
+    Creates the adjacency matrix of a random graph. 
     
+    Arguments:
+        N
+            Size of the random graph. 
+    """
+    
+    A = np.zeros((N, N))
+    
+    for i in range(N):
+        for j in range(i):
+            A[i, j] = npr.randint(2)
+            A[j, i] = A[i, j]
+    
+    return A
