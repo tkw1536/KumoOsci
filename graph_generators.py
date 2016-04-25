@@ -52,3 +52,22 @@ def random_graph(N):
             A[j, i] = A[i, j]
     
     return A
+
+def line_graph(N):
+    """
+    Creates a line graph of size N. 
+
+    Arguments:
+        N
+            Size of the the random graph
+    """
+
+    # start with the cylic graph
+    A = cyclic_graph(N)
+
+    # break the cycle
+    A[N - 1, 0] = 0
+    A[0, N - 1] = 0
+
+
+    return A

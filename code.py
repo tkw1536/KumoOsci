@@ -6,7 +6,7 @@ import oscilator
 
 import numpy as np
 from numpy import random as npr
-from graph_generators import cyclic_graph, complete_graph, random_graph
+from graph_generators import cyclic_graph, complete_graph, random_graph, line_graph
 from plotter import plot_network_and_graph, animate_network
 
 def simulate_and_plot(A, omega):
@@ -28,8 +28,15 @@ def simulate_and_plot(A, omega):
     plt.show()
 
 def main():
+
+
     # set parameters and create oscilator
-    A = - random_graph(10)
+    A = [
+        [-1,-1,0 ,0 ],
+        [-1,0 ,-1,-1],
+        [0 ,-1,0 ,-1],
+        [0 ,-1,-1,0 ]
+    ]
     omega   =   0.3
     
     simulate_and_plot(A, omega)
