@@ -41,8 +41,11 @@ def simulate_and_plot(A, omega):
 def main():
     # set parameters and create oscilator
     A = A = np.array([
-        [0,-1],
-        [-1,0]
+        [0,-1,0,-1,0],
+        [-1,0,-1,0,0],
+        [0,-1,0,-1,0],
+        [-1,0,-1,0,0],
+        [0,0,0,-1,0]
     ])
     omega   =   0.3
     
