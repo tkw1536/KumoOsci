@@ -1,7 +1,7 @@
 \ednote{Tom: Write a proper introduction paragraph}
 
 \subsection{Oscillators}
-Oscillators can be described as a repetitive motion of some measure about a central value which is often the point of equilibrium. This term is most often used in mechanical systems but it must also be noted that oscillations occur in dynamic systems too such as economic graphs, geothermal temperatures across areas and periodic ``firing'' of fireflies in nature. \ednote{Alee: Reference the figure and expand on this paragraph a bit}
+Oscillators can be described as a repetitive motion of some measure about a central value which is often the point of equilibrium. This term is most often used in mechanical systems but it must also be noted that oscillations occur in dynamic systems too such as economic graphs, geothermal temperatures across areas and periodic ``firing'' of fireflies in nature. \ednote{Alee: Reference the figure and expand on this paragraph a bit more. This sounds way too general. }
 \begin{figure}[h!]
   \centering
   \begin{subfigure}[h!]{0.3\textwidth}
@@ -35,22 +35,20 @@ A bit more complex example can be of two pendulums joined together by an energy 
 As we can see in Figure 2\ednote{Alee: Reference properly via \textbackslash ref}, a pendulum only attains its maximum amplitude when the other has its lowest one. This period is achieved after sufficient time has been given to the system to attain synchronization.  
 
 \subsection{Synchronisation}
-It should be noted that synchronization can only occur in two ways. The first being if the oscillators have some way of communicating with each other or the second more rarer case where they start at the same exact time. For now we will focus on the first case. Communication can be achieved either by using a medium such as a string between pendulums or even just the intrinsic tendency of natural beings to produce a unison of movement(synchronization) such as fireflies flashing or clapping in a room.
+It should be noted that synchronization can only occur in two ways. The first being if the oscillators have some way of communicating with each other or the second more rarer case where they start at the same exact time. For now we will focus on the first case\ednote{We are only interested in the first case, the second one we dont ever consider}. Communication can be achieved either by using a medium such as a string between pendulums or even just the intrinsic tendency of natural beings to produce a unison of movement(synchronization) such as fireflies flashing or clapping in a room\ednote{Explain the fireflies model in more detail}.
 
 \subsection{Adjacency Matrix and the Network Topology }
-Now we move on to define the mathematical tools being used in this project. The Adjacency matrix is a square matrix that is using to represent a finite graph. The elements of the matrix indicate whether pairs of verticies are adjacent or not, ie if they are adjacent they get assigned a value of -1 else 0. This information can be directly retrieved from the topology network graph as follows-:
+Now we move on to define the mathematical tools being used in this project. \ednote{First exapling the oscilators, then explain in the special situation where $A$ is 0 / 1 we can interpret it as an adjacency matrix. This connection is important as we are using it later on. }The Adjacency matrix is a square matrix that is using to represent a finite graph. The elements of the matrix indicate whether pairs of verticies are adjacent or not, ie if they are adjacent they get assigned a value of -1 else 0. This information can be directly retrieved from the topology network graph as follows-:
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.5\linewidth]{imgs/examplefigure}
+\includegraphics[width=\linewidth]{imgs/examplefigure}
 \caption{}
 \end{figure}
 
-As we can see, on the top is the topological network containing the vertices of the system and below lies the coupling graphs of the system over time. Over here, we can see that the couples are trying to stay as far away as possible so after the initial unrest there is always a phase difference of 2$\pi$.
+As we can see, on the top is the topological network containing the vertices of the system and below lies the coupling graphs of the system over time. Over here, we can see that the couples are trying to stay as far away as possible so after the initial unrest there is always a phase difference of 2$\pi$. \ednote{JUST show the graph and the adjacency matrix here. This is ONLY the introduction. }
 
 \subsection{Goal}
-Our goal for this study is to investigate coupled systems with negative coupling co-efficients. Positive Coupling Coefficients can have expected looking patterns but the results get more interesting for negative ones.
-
-\ednote{Alee: Think about removing subsections, they seem too short. }
+Our goal for this study is to investigate coupled systems with negative coupling co-efficients. Positive Coupling Coefficients can have expected looking patterns but the results get more interesting for negative ones \ednote{Alee: Sounds good but needs expansion}. 
 
 In Section~\ref{sec:kuramoto} we will introduce the Kuramoto oscillator, its equations, our implementation and do an analytic analysis of stability. In Section~\ref{sec:negative} we continue with describing the patterns we encountered when using negative coefficients. We then move on to describe a method which can be used to re-create arbitrary patterns in Section~\ref{sec:patterns} before concluding in Section~\ref{sec:conclusion}. 

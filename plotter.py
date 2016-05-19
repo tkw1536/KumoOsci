@@ -28,6 +28,8 @@ def plot_network_and_graph(kura, ts, s, layout = None, labels = False, edges = T
     
     # get ready to make the plot
     plt.subplot(212)
+    plt.xlabel("$t$")
+    plt.ylabel("$\\theta_i(t)$")
     colors = []
     
     for j in range(kura.N):
@@ -37,6 +39,8 @@ def plot_network_and_graph(kura, ts, s, layout = None, labels = False, edges = T
     
     # now plot the graph
     plt.subplot(211)
+    plt.gca().set_xticklabels([])
+    plt.gca().set_yticklabels([])
     
     # Get the graph and layout
     G = kura.graph
