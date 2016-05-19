@@ -5,6 +5,6 @@
 \contentsline {subsection}{\numberline {1.4}Adjacency Matrix and the Network Topology }{5}
 \contentsline {subsection}{\numberline {1.5}Goal}{5}
 \contentsline {section}{\numberline {2}The Kuramoto oscilator}{7}
-\contentsline {section}{\numberline {3}Negative coefficient systems}{8}
+\contentsline {section}{\numberline {3}Patterns in negative coefficient systems}{8}
 \contentsline {section}{\numberline {4}Reproducing desired patterns}{9}
 \contentsline {section}{\numberline {5}Conclusion}{10}
