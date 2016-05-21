@@ -31,11 +31,23 @@ A bit more complex example can be of two pendulums joined together by an energy 
 \caption{}
 \label{fig:intro_couple}
 \end{figure}
-
+\\
 As we can see in Figure 2\ednote{Alee: Reference properly via \textbackslash ref}, a pendulum only attains its maximum amplitude when the other has its lowest one. This period is achieved after sufficient time has been given to the system to attain synchronization.  
 
 \subsection{Synchronisation}
-It should be noted that synchronization can only occur in two ways. The first being if the oscillators have some way of communicating with each other or the second more rarer case where they start at the same exact time. For now we will focus on the first case\ednote{We are only interested in the first case, the second one we dont ever consider}. Communication can be achieved either by using a medium such as a string between pendulums or even just the intrinsic tendency of natural beings to produce a unison of movement(synchronization) such as fireflies flashing or clapping in a room\ednote{Explain the fireflies model in more detail}.
+It should be noted that synchronization can only occur in two ways. The first being if the oscillators have some way of communicating with each other or the second more rarer case where they start at the same exact time. We only focus on the first case in our study.\ednote{We are only interested in the first case, the second one we dont ever consider}. Communication can be achieved either by using a medium such as a string between pendulums or even just the intrinsic tendency of natural beings to produce a unison of movement(synchronization) such as fireflies flashing or humans clapping in a room. The firefly flashing, more commonly known as the firefly model, is a classic example of synchronisation. Their light patters are part of a mating display that the male fireflies use to attract the female ones and if successful, the female replies back with a characteristic flash of it own. Although, this is synchronisation on its own, there is onyl a few specie of firefly that can synchronize on a much bigger level and is usually the one seen in large groups of fireflies flashing together in unison. The following visually describes the flashes-:
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{imgs/flash}
+	\caption{}
+	\label{fig:intro_couple}
+\end{figure}
+\\
+
+As we can see in the figure, all of the species fire of one after another in a synchronized fashion except the blue one which seems to be random.
+
+
+\ednote{Explain the fireflies model in more detail}.
 
 \subsection{Adjacency Matrix and the Network Topology }
 Now we move on to define the mathematical tools being used in this project. \ednote{First exapling the oscilators, then explain in the special situation where $A$ is 0 / 1 we can interpret it as an adjacency matrix. This connection is important as we are using it later on. }The Adjacency matrix is a square matrix that is using to represent a finite graph. The elements of the matrix indicate whether pairs of verticies are adjacent or not, ie if they are adjacent they get assigned a value of -1 else 0. This information can be directly retrieved from the topology network graph as follows-:
@@ -52,3 +64,5 @@ As we can see, on the top is the topological network containing the vertices of 
 Our goal for this study is to investigate coupled systems with negative coupling co-efficients. Positive Coupling Coefficients can have expected looking patterns but the results get more interesting for negative ones \ednote{Alee: Sounds good but needs expansion}. 
 
 In Section~\ref{sec:kuramoto} we will introduce the Kuramoto oscillator, its equations, our implementation and do an analytic analysis of stability. In Section~\ref{sec:negative} we continue with describing the patterns we encountered when using negative coefficients. We then move on to describe a method which can be used to re-create arbitrary patterns in Section~\ref{sec:patterns} before concluding in Section~\ref{sec:conclusion}. 
+
+
