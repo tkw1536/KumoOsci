@@ -11,7 +11,15 @@ where:
 	\item[$A_{i, j} = $] The adjacency matrix of the system
 \end{itemize}
 ~\\
-Each oscillator has its own natural frequency which is held when kept in isolation but when coupled with other oscillators, it changes. This change is periodic and is thus represented by the periodic $\sin$ function.
+Each oscillator has its own natural frequency which is held when kept in isolation but when coupled with other oscillators, it changes. This change is periodic and is thus represented by the periodic $\sin$ function. 
+
+\subsection{Code}
+We used the NumPy package for computing the $\sin$ of the phase differences.
+\\
+\begin{lstlisting}
+ s.append('(%s)*np.sin(theta[%s]-theta[%s])'%(self.A[i,j],j,i))
+\end{lstlisting}
+
 
 \ednote{Alee: Write about the system: Describe the equation in general and what each constant means. No graphs here yet, just the basic explanation. }
 \ednote{Alee: Write about the simulation we have written, i.e. we used Numpy, we have a script that can handle arbritrary parameters and make a simple **positive coefficient** system where you can explain the connection. }

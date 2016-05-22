@@ -6,9 +6,10 @@
 \contentsline {subsection}{\numberline {1.5}Goal}{6}
 \contentsline {section}{\numberline {2}The Kuramoto oscilator}{6}
 \contentsline {subsection}{\numberline {2.1}Definition}{6}
+\contentsline {subsection}{\numberline {2.2}Code}{7}
 \contentsline {section}{\numberline {3}Patterns in negative coefficient systems}{7}
-\contentsline {subsection}{\numberline {3.1}The 2-oscilator system}{7}
-\contentsline {subsection}{\numberline {3.2}Oscilators on a line}{8}
+\contentsline {subsection}{\numberline {3.1}The 2-oscilator system}{8}
+\contentsline {subsection}{\numberline {3.2}Oscilators on a line}{9}
 \contentsline {subsection}{\numberline {3.3}Oscilators on a Circle System}{9}
 \contentsline {section}{\numberline {4}Reproducing desired patterns}{11}
 \contentsline {subsection}{\numberline {4.1}Defining pattern reproduction}{11}
