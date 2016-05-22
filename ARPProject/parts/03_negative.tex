@@ -2,7 +2,7 @@
 For our investigation of the negative coefficient situation we consider a simplified version of the Kuramoto oscilator. Specifically we assume that all oscilators have the same basic frequency $\omega_i$, which we just call $\omega$. We also assume that there is no external driver to the system, i.e. $b_i = 0$. This simplifies the system of ODEs to: 
 
 \[
-\dot{\theta_i} = \omega + \sum_{j = 0}^{N}{A_{i, j}\sin({\theta_j - \theta_i})}
+\dot{\theta_i} = \omega + \sum_{j = 0}^{N - 1}{A_{i, j}\sin({\theta_j - \theta_i})}
 )\]
 
 Furthermore we assume that all coefficients in the matrix $A$ are either $-1$ or $0$. We can thus see $A$ as the negative of an adjacency matrix of a graph. Here each oscilator is considered as a node of a graph and an edge can be interpreted as $A$ having a $-1$ in the appropriate place. 

@@ -2,38 +2,46 @@
 
 \subsection{Definition}
 The problem of having a naive viewpoint on the subject of synchronization is that one may believe that every different coupling situation would require its own treatment. This may stem from the fact that one may be focusing too much on the differences rather then the similarities which are found in all synchronous systems.  In this project we want to use the model of oscilators that was first introduced by Kuramoto in ~\cite{book:kura}. The most common form is given by the following system of ODEs:
-
 \[
-\dot{\theta_i} = \omega_i + \sum_{j = 0}^{N}{A_{i, j}\sin({\theta_j - \theta_i}}) + B_i \sin(\Omega(t) - \theta_i)\]
-
-\ednote{What does each coeeficient in this form mean?}
-Here 
+\dot{\theta_i} = \omega_i + \sum_{j = 0}^{N - 1}{A_{i, j}\sin({\theta_j - \theta_i}}) + b_i \sin(\Omega(t) - \theta_i)
+\]
+In this equation
 \begin{itemize}
-	\item[${\theta_i} = $] The phase of the $i\textsuperscript{th}$ oscillator
-	\item[$\omega_i = $] The natural frequency of the $i\textsuperscript{th}$ oscillator
-	\item[$A_{i, j} = $] The adjacency matrix of the system
-	\item[$\Omega(t) = $] An External Driver on the system
-	\item[$B_i = $] The vector containing coefficients of the external oscillator. The higher these coefficients, the stronger the influence from the external driver
+	\item $\theta_i$ is the phase of the $i\textsuperscript{th}$ oscillator, 
+	\item $N$ the number of oscilators, 
+	\item $\omega_i$ is the natural frequency of the $i\textsuperscript{th}$ oscillator, 
+	\item $A$ is the matrix of coupling coefficients of the system, 
+	\item $\Omega(t)$ is the phase of an external driver to the system and
+	\item $b$ is the vector of coupling coefficients to the external driver
 \end{itemize}
-~\\
-Each oscillator has its own natural frequency which is held when kept in isolation but when coupled with other oscillators, it changes. This change is periodic and is thus represented by the periodic $\sin$ function. It should be noted that any periodic function can be taken. Sometimes, even a constant function is taken to make the equation simpler.
 
-\subsection{The Adjacency matrix and network topology}
+In the Kuramoto oscilator model the main object of study is the phase of $N$ different so-called Kuramoto oscilators, $\theta_0$ to $\theta_{N - 1}$. It should be noted that one usually looks at this modulo $2 \pi$. Each oscilator oscilates at its own natural frequency $\omega_i$. However they are also influenced by the different other oscilators as well as by an external driver to the system. The observation of the other oscilations is represented by the periodic $\sin$ function. How strong each oscilator is influenced by the others and the external drivers is measured by the so-called coupling coefficients $A_{i, j}$ and $b_i$ respectively. 
 
-\ednote{Link to the above: Each oscilator can be seen as a node in a network?}
+\subsection{The Coupling matrix and associated network topology}
 
-Now we move on to define the mathematical tools being used in this project. The Adjacency matrix is a square matrix that is using to represent a finite graph. The elements of the matrix indicate whether pairs of verticies are adjacent or not, ie if they are adjacent they get assigned a value of -1 else 0. This information can be directly retrieved from the topology network graph as follows-:
+We can easily see from the notation above that we can consider the coupling coeffients $A_{i, j}$ as a square matrix $A$ of size $N$. Similarly we can consider the coupling to the external driver as a vector $b$ of length $n$. 
 
-\begin{figure}[h!]
+It turns out that if we take a symmetric matrix $A$ the system exhibits very interesting behaviour that can be related to another interpretation of $A$. A symmetric matrix containing only zeros and ones can naturally be seen as the adjacency matrix of an undirected, finite graph. In an adjacency matrix the elements indicate whether pairs of vertices are connected via an edge or not, i.e. if the value is $1$ there is an edge, otherwise there is not. This information can then be used to reconstruct the graph from the matrix. 
+
+When solving the system this natural interpretation of $A$ is very useful to understand the dynamics. A typical plot generated when simulating the system can be found in Figure~\ref{fig:adjacencymatrix}. On the top is the graph that is created from an adjacency matrix $A$. Each vertex of the system represents a single oscilator. On the bottom is a plot of the phases of the oscilators of the system over time. 
+
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.8\linewidth]{imgs/examplefigure}
-\caption{}
+\includegraphics[width=\textwidth]{imgs/examplefigure}
+\caption{A typical plot of a topology and output of the system}
+\label{fig:adjacencymatrix}
 \end{figure}
 
-As we can see, on the top is the topological network containing the vertices of the system and below lies the coupling graphs of the system over time. Over here, we can see that the couples are trying to stay as far away as possible so after the initial unrest there is always a phase difference of 2$\pi$. \ednote{JUST show the graph and the adjacency matrix here. This is ONLY the introduction. }
+\subsection{Implementation of the system}
+We have implemented a simulation of this system using Python3. Our implementation uses the python packages Numpy and Scipy and in particular leverages the standard ODE solver functionality provided. Our code is very modular and consists of four main parts: 
 
+\begin{enumerate}
+	\item A simulator of the system, found in ``oscilator.py''. This takes the parameters for the ODE and runs a simulation of the system given some initial values. 
+	\item Some plotting code, found in ``plotter.py'', which takes the output of the system and makes plots like the ones that can be found in the various Figures in this report. 
+	\item Some code that generates adjacency matrices for specific graphs, found in ``graph\_generators.py''. 
+	\item the main code of the system (found in ``code.py'') which utilises the components above and runs the entire simulation. 
+\end{enumerate}
 
-\subsection{Our implementation}
 The following code line illustrates the gist of how we used the NumPy package to compute the $\sin$ of the phase differences and the standard ode solver to numerically estimate the solution.
 \begin{lstlisting}
 if (self.A[i, j] != 0) and (i != j):
@@ -44,21 +52,4 @@ s.append('(%s)*np.sin((%s)*t - theta[%s])' % (self.B[i], self.OMEGA, i))
 
 sol = odeint(self.to_equation(), y0, t, *args, **kwargs)
 \end{lstlisting}
-Basically, we just append the calculated values into an array and later solve that using the ODE solver. As an example, I will demonstrate using a random 3x3 graph with no external driver. The adjacency matrix of the graph is-:
-\[
-\begin{bmatrix}
-	\centering
-	0 & 1 & 1\\ 
-	1 & 0 & 1\\ 
-	1 & 1 & 0
-\end{bmatrix}
-\]
-Since its a 3x3 matrix, there will be 3 oscillators. Everything except the diagonals are 1 which means all the oscialltors are connected with each other but not with themselves. Therefore, we get the expected graph-:
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.8\linewidth]{imgs/examplefigure2}
-	\caption{}
-\end{figure}
-
-
-\ednote{Alee: Write about the simulation we have written, i.e. we used Numpy, we have a script that can handle arbritrary parameters and make a simple **positive coefficient** system where you can explain the connection. }
+Basically, we just append the calculated values into an array and later solve that using the ODE solver. 
