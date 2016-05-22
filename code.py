@@ -15,7 +15,6 @@ def simulate_and_plot(A, omega):
     
     # create initial values and time
     y0 = npr.uniform(0, 2*np.pi, size=osc.N)
-    y0 = np.linspace(0, 2*np.pi, 6, endpoint=False)
     ts = np.arange(0, 50, 0.01)
     
     # simulate
