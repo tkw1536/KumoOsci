@@ -44,8 +44,21 @@ s.append('(%s)*np.sin((%s)*t - theta[%s])' % (self.B[i], self.OMEGA, i))
 
 sol = odeint(self.to_equation(), y0, t, *args, **kwargs)
 \end{lstlisting}
-Basically, we just append the calculated values into an array and later solve that using the ODE solver. As an example, I will demonstrate using a random 3x3 graph with no external driver.
-
+Basically, we just append the calculated values into an array and later solve that using the ODE solver. As an example, I will demonstrate using a random 3x3 graph with no external driver. The adjacency matrix of the graph is-:
+\[
+\begin{bmatrix}
+	\centering
+	0 & 1 & 1\\ 
+	1 & 0 & 1\\ 
+	1 & 1 & 0
+\end{bmatrix}
+\]
+Since its a 3x3 matrix, there will be 3 oscillators. Everything except the diagonals are 1 which means all the oscialltors are connected with each other but not with themselves. Therefore, we get the expected graph-:
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{imgs/examplefigure2}
+	\caption{}
+\end{figure}
 
 
 \ednote{Alee: Write about the simulation we have written, i.e. we used Numpy, we have a script that can handle arbritrary parameters and make a simple **positive coefficient** system where you can explain the connection. }
