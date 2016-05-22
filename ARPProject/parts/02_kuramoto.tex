@@ -4,8 +4,7 @@
 The problem of having a naive viewpoint on the subject of synchronization is that one may believe that every different coupling situation would require its own treatment. This may stem from the fact that one may be focusing too much on the differences rather then the similarities which are found in all synchronous systems.  In this project we want to use the model of oscilators that was first introduced by Kuramoto in ~\cite{book:kura}. The most common form is given by the following system of ODEs:
 
 \[
-\dot{\theta_i} = \omega_i + \sum_{j = 0}^{N}{A_{i, j}\sin({\theta_j - \theta_i}} + B_i \sin(\Omega(t) - \theta_i)
-)\]
+\dot{\theta_i} = \omega_i + \sum_{j = 0}^{N}{A_{i, j}\sin({\theta_j - \theta_i}}) + B_i \sin(\Omega(t) - \theta_i)\]
 
 \ednote{What does each coeeficient in this form mean?}
 Here 
@@ -13,17 +12,11 @@ Here
 	\item[${\theta_i} = $] The phase of the $i\textsuperscript{th}$ oscillator
 	\item[$\omega_i = $] The natural frequency of the $i\textsuperscript{th}$ oscillator
 	\item[$A_{i, j} = $] The adjacency matrix of the system
+	\item[$\Omega(t) = $] An External Driver on the system
+	\item[$B_i = $] The vector containing coefficients of the external oscillator. The higher these coefficients, the stronger the influence from the external driver
 \end{itemize}
 ~\\
-Each oscillator has its own natural frequency which is held when kept in isolation but when coupled with other oscillators, it changes. This change is periodic and is thus represented by the periodic $\sin$ function. 
-
-\subsection{Code}
-We used the NumPy package for computing the $\sin$ of the phase differences.
-\\
-\begin{lstlisting}
- s.append('(%s)*np.sin(theta[%s]-theta[%s])'%(self.A[i,j],j,i))
-\end{lstlisting}
-
+Each oscillator has its own natural frequency which is held when kept in isolation but when coupled with other oscillators, it changes. This change is periodic and is thus represented by the periodic $\sin$ function. It should be noted that any periodic function can be taken. Sometimes, even a constant function is taken to make the equation simpler.
 
 \subsection{The Adjacency matrix and network topology}
 
@@ -33,7 +26,7 @@ Now we move on to define the mathematical tools being used in this project. The 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{imgs/examplefigure}
+\includegraphics[width=0.8\linewidth]{imgs/examplefigure}
 \caption{}
 \end{figure}
 
@@ -41,5 +34,18 @@ As we can see, on the top is the topological network containing the vertices of 
 
 
 \subsection{Our implementation}
+The following code line illustrates the gist of how we used the NumPy package to compute the $\sin$ of the phase differences and the standard ode solver to numerically estimate the solution.
+\begin{lstlisting}
+if (self.A[i, j] != 0) and (i != j):
+s.append('(%s)*np.sin(theta[%s] - theta[%s])' % (self.A[i, j], j, i))
+
+if self.B[i] != 0:
+s.append('(%s)*np.sin((%s)*t - theta[%s])' % (self.B[i], self.OMEGA, i))
+
+sol = odeint(self.to_equation(), y0, t, *args, **kwargs)
+\end{lstlisting}
+Basically, we just append the calculated values into an array and later solve that using the ODE solver. As an example, I will demonstrate using a random 3x3 graph with no external driver.
+
+
 
 \ednote{Alee: Write about the simulation we have written, i.e. we used Numpy, we have a script that can handle arbritrary parameters and make a simple **positive coefficient** system where you can explain the connection. }
