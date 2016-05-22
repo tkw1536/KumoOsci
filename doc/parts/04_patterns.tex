@@ -1,6 +1,6 @@
 \label{sec:patterns}
 
-\subsection{Defining pattern reproduction}
+\subsection{Defining Pattern Reproduction}
 
 After making the observations in the previous section the next question that naturally occurs is if given a certain pattern, is there an associated graph topology (or associated matrix $A$) that is capable of reproducing it? In other words given a pattern, can we ``train'' a topology to create it?
 
@@ -8,7 +8,7 @@ In order to answer this question we first need to define ``pattern'' properly. W
 
 The reader should furthermore note that since we only consider phase shifts, the order of oscilators themselves is not relevant and all observation should be invariantmodulo $2\pi$. 
 
-\subsection{Simple patterns}
+\subsection{Simple Patterns}
 
 We shall first consider the simple case of reproducing a simple pattern between 2 oscilators. If we take into account what we learned in the previous section, it is easily possible to re-create phase-shifts of $\frac{2\pi}{p}$ when $p$ is prime. 
 
@@ -28,7 +28,7 @@ If we wanted to for example reproduce the phase $\frac{8 {\cdot} 2 \pi}{15}$ we 
 
 \begin{figure}[h]
   \centering
-  \includegraphics[height=0.5\textheight]{imgs/pattern_joined}
+  \includegraphics[height=\textwidth]{imgs/pattern_joined}
   \caption{Graph topology used to reproduce a more complex pattern: Two cicular topologies joined at the yellow node. The green and yellow nodes will have a phase shift of $\frac{2\pi}{5}$, the yellow and red nodes will have a phase shift of $\frac{2\pi}{3}$. This gives a total phase shift of $\frac{2\pi}{5} + \frac{2\pi}{5} = \frac{8 {\cdot} 2 \pi}{15}$. }
   \label{fig:pattern_joined}
 \end{figure}
